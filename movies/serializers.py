@@ -6,9 +6,12 @@ from movies.models import Movie, Review, Rating
 class MovieListSerializer(serializers.ModelSerializer):
     """List of movies"""
 
+    rating_user = serializers.BooleanField()
+    middle_star = serializers.IntegerField()
+
     class Meta:
         model = Movie
-        fields = ('title', 'tagline', 'category')
+        fields = ('id', 'title', 'tagline', 'category', 'rating_user', 'middle_star')
 
 
 class ReviewCreateSerializer(serializers.ModelSerializer):
@@ -65,7 +68,7 @@ class CreateRatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating
         fields = ('star', 'movie')
-        
+
     def create(self, validated_data):
         rating = Rating.objects.update_or_create(
             ip=validated_data.get('ip', None),
