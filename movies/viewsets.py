@@ -7,7 +7,7 @@ from rest_framework.response import Response
 from movies.models import Actor, Movie
 from movies.serializers import ActorListSerializer, ActorDetailSerializer, MovieListSerializer, MovieDetailSerializer, \
     ReviewCreateSerializer, CreateRatingSerializer
-from movies.service import MovieFilter, get_client_ip
+from movies.service import MovieFilter, get_client_ip, PaginationMovie
 
 
 # class ActorViewSet(viewsets.ViewSet):
@@ -28,6 +28,7 @@ class MovieViewSet(viewsets.ReadOnlyModelViewSet):
 
     filter_backends = (DjangoFilterBackend,)
     filterset_class = MovieFilter
+    pagination_class = PaginationMovie
 
     # permission_classes = [permissions.IsAuthenticated]
 
